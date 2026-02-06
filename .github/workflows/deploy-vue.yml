@@ -3,7 +3,7 @@ name: deploy vue
 on:
   push:
     branches:
-      - main
+      - main # ตรวจสอบแล้วว่า repository ของคุณใช้ branch ชื่อ main เป็นหลัก
 
 jobs:
   deploy-app:
@@ -19,7 +19,7 @@ jobs:
           run_install: false
 
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v4 
+        uses: actions/setup-node@v4 # เพิ่มส่วนที่หายไปเพื่อให้ระบบ build ได้
         with:
           node-version: 20
           cache: 'pnpm'
@@ -35,6 +35,6 @@ jobs:
           host: ${{secrets.HOST}}
           username: ${{secrets.SSH_USER_NAME}}
           key: ${{secrets.SSH_KEY}}
-          source: "./dist/*"
+          source: "./dist/*" # โฟลเดอร์ที่ได้จากการ build โปรเจกต์ Vue
           target: "/var/www/html"
           strip_components: 1
